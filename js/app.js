@@ -2,9 +2,7 @@ Vue.component('modal', {
   template: '#modal-template'
 });
 
-let chmod = {
-
-	       }
+const CHMODVAR = {}
 
 var app = new Vue({
 	el:"#app-chmod",
