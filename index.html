@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test_vue.js</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>		
+
+</head>
+<body style="margin-top: 80px;">
+
+<h1 style="margin-bottom: 80px;">What's that chmod ?</h1>
+	<div id="app-chmod">	
+		<select v-model="selectOne">
+			<option v-for="option in optionsOne" v-bind:value="option.value">
+					    {{ option.text }}
+			</option>
+		</select>
+		<span>User : <span style="color:white;">{{ selectOne }} </span></span>
+		<select v-model="selectTwo">
+	  		<option v-for="option in optionsTwo" v-bind:value="option.value">
+			    {{ option.text }}
+		    </option>
+		</select>
+		<span>Group :<span style="color:white;">{{ selectTwo }} </span></span>
+		<select v-model="selectThree">
+	  		<option v-for="option in optionsThree" v-bind:value="option.value">
+			    {{ option.text }}
+		    </option>
+		</select>
+		<span>Users :<span style="color:white;">{{ selectThree }} </span></span>		
+
+
+		<h5 class="results" style="color: white;">{{ selectOne }}{{ selectTwo }}{{ selectThree }}</h5>
+
+		<!-- template for the modal component -->
+		<script type="text/x-template" id="modal-template">
+		  <transition name="modal">
+		    <div class="modal-mask">
+		      <div class="modal-wrapper">
+		        <div class="modal-container">
+		          <div class="modal-header">
+		            <slot name="header">
+		              default header
+		            </slot>
+		          </div>
+		          <div class="modal-body">
+		            <slot name="body">
+		              <ul>
+		              	<li>
+						  R	stands for "Read" (is value is 4)	
+		              	</li>
+		              	<li>
+						  W	 for "Write" (2)	
+		              	</li>
+		              	<li>
+		              	  X for "Execute" (1)	
+		              	</li>
+		              	<br />
+		              	<br />
+		              </ul>
+						  then, r + w = 6 this gives rw-, <br />
+						  or r + x = 5, so it's r-x  
+		            </slot>
+		          </div>
+		          <div class="modal-footer">
+		            <slot name="footer">
+		              <p></p>
+		              <button class="modal-default-button" @click="$emit('close')">
+		                X
+		              </button>
+		            </slot>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </transition>
+		</script>
+
+		<button id="show-modal" @click="showModal = true">Learn More</button>
+  		<!-- use the modal component, pass in the prop -->
+  		<modal v-if="showModal" @close="showModal = false">
+    	<!--
+      	you can use custom content here to overwrite
+      	default content
+    	-->
+  		  <h3 slot="header">ALL YOU NEED TO KNOW :</h3>
+  		</modal>
+
+		<a href="https://github.com/julien-lav/" target="_blank"><p>julien-lav</p></a>
+
+</div>
+
+	<!-- 
+	<button>Learn more</button>	
+	-->
+
+	<script src="js/app.js"></script>
+</body>
+</html>
